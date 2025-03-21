@@ -9,7 +9,7 @@ const urls = [
   "https://pricespy.co.nz/product.php?p=14002034", //chemical
 ];
 
-import puppeteer from "puppeteer";
+import puppeteer from "puppeteer-core";
 
 const scrollToDiv = async (page, isItemSoldSelector) => {
   try {
