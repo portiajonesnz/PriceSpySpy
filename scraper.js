@@ -10,6 +10,9 @@ const urls = [
 ];
 
 import puppeteer from "puppeteer-core";
+import { configDotenv } from "dotenv";
+
+configDotenv();
 
 const scrollToDiv = async (page, isItemSoldSelector) => {
   try {
@@ -41,13 +44,28 @@ const scrollToDiv = async (page, isItemSoldSelector) => {
   }
 };
 
+console.log(process.env.CHROME_EXECUTABLE_PATH);
+
 // Funcion does webscaping
 const getPrice = async (url) => {
   // Launch puppeteer
-  const browser = await puppeteer.connect({
-    browserWSEndpoint: process.env.BROWSER_WS_ENDPOINT,
-  });
-
+  let browser;
+  if (process.env.CHROME_EXECUTABLE_PATH) {
+    // Local development
+    browser = await puppeteer.launch({
+      headless: false,
+      args: ["--no-sandbox"],
+      executablePath: process.env.CHROME_EXECUTABLE_PATH,
+    });
+  } else if (process.env.BROWSER_WS_ENDPOINT) {
+    // Browserless setup
+    browser = await puppeteer.connect({
+      browserWSEndpoint: process.env.BROWSER_WS_ENDPOINT,
+    });
+  } else {
+    console.error("No browser setup found");
+    return;
+  }
   // Open a new page
   const page = await browser.newPage();
 
@@ -97,8 +115,6 @@ const getPrice = async (url) => {
   }
 };
 
-(async () => {
-  for (const url of urls) {
-    await getPrice(url); // Await each scrape to ensure sequential execution
-  }
-})();
+for (const url of urls) {
+  await getPrice(url); // Await each scrape to ensure sequential execution
+}
