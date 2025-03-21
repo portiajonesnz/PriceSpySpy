@@ -45,7 +45,7 @@ const scrollToDiv = async (page, isItemSoldSelector) => {
 const getPrice = async (url) => {
   // Launch puppeteer
   const browser = await puppeteer.connect({
-    borwserWSEndpoint: process.env.BROWSER_WS_ENDPOINT,
+    browserWSEndpoint: process.env.BROWSER_WS_ENDPOINT,
   });
 
   // Open a new page
