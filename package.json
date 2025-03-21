@@ -2,7 +2,7 @@
   "name": "pricespyspy",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "scraper.js",
   "scripts": {
     "start": "node scraper.js",
     "dev": "nodemon scraper.js",
@@ -13,5 +13,6 @@
   "license": "ISC",
   "dependencies": {
     "puppeteer": "^24.1.1"
-  }
+  },
+  "type": "module"
 }
