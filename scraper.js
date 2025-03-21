@@ -44,11 +44,8 @@ const scrollToDiv = async (page, isItemSoldSelector) => {
 // Funcion does webscaping
 const getPrice = async (url) => {
   // Launch puppeteer
-  const browser = await puppeteer.launch({
-    headless: true,
-    defaultViewport: null,
-    executablePath: "/usr/bin/google-chrome",
-    args: ["--no-sandbox"],
+  const browser = await puppeteer.connect({
+    borwserWSEndpoint: process.env.BROWSER_WS_ENDPOINT,
   });
 
   // Open a new page
