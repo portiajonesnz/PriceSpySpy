@@ -12,7 +12,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "puppeteer": "^24.1.1"
+    "dotenv": "^16.4.7",
+    "puppeteer-core": "^24.4.0"
   },
   "type": "module"
 }
